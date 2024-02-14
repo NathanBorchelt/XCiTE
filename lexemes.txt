@@ -1,0 +1,34 @@
+[	open square bracket
+]	close square bracket
+=	assignment
+,	comma
+!	exclamation
+>	greater than
+<	less than
+>=	greater than or equal to
+<=	less than or equal to
+==	is equal to
+(	open parenthesis
+)	close parenthesis
+{	open curly brace
+}	close curly brace
++	addition
+-	subtraction
+/	division
+*	multiplication
+%	modulus
+INT INT keyword
+BOOL    BOOL keyword
+FLOAT   FLOAT keyword
+CHAR    CHAR keyword
+STRING  STRING keyword
+ARRAY   ARRAY keyword
+WHILE   WHILE keyword
+IF  IF keyword
+ELSE    ELSE keyword
+TRUE    TRUE keyword
+FALSE   FALSE keyword
+NOT NOT keyword
+AND AND keyword
+OR  OR keyword
+PRINT   PRINT keyword
