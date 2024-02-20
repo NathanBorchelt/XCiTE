@@ -4,7 +4,6 @@
 #include <stdio.h>
 %}
 
-<<<<<<< HEAD
 int         "INT"
 bool        "BOOL"
 float       "FLOAT"
@@ -23,25 +22,8 @@ print       "PRINT"
 
 strLit      "\""[^\"]*"\""
 intLit      "0" | ["-"?][1-9][[:digit:]]*
-floatLit    ["-"?]"0."[[:digit:]]+ - ["-"?][0{2,}]"."[0{2,}] | ["-"?][1-9][[:digit:]]*"."[[:digit:]]+
-charLit     "'"."'"
-=======
-int     "INT"
-bool    "BOOL"
-float   "FLOAT"
-char    "CHAR"
-string  "STRING"
-array   "ARRAY"
-while   "WHILE"
-if      "IF"
-else    "ELSE"
-true    "TRUE"
-false   "FALSE"
-not     "NOT"
-and     "AND"
-or      "OR"
-print   "PRINT"    
->>>>>>> 1a885595cfe818c32788fcae27f0ba9dccf2e553
+floatLit    ["-"?](0 | [1-9]([[:digits:]]*))[.](0 | ([0-9]*)[1-9])
+charLit     ['].[']
 
 osBracket       "["
 csBracket       "]"
@@ -83,6 +65,11 @@ other .
 {or} printf("%s:\tOR keyword", yytext);
 {print} printf("%s:\tPRINT keyword", yytext);
 
+{strLit} printf("%s:\tString Literal", yytext);
+{intLit} printf("%s:\tInteger Literal", yytext);
+{floatLit} printf("%s:\tFloat Literal", yytext);
+{charLit} printf("%s:\tCharacter Literal", yytext);
+
 {osBracket} printf("%s:\tOpen Square Bracket", yytext);
 {csBracket} printf("%s:\tClose Square Bracket", yytext);
 {assignment} printf("%s:\tAssignment", yytext);
@@ -102,9 +89,6 @@ other .
 {division} printf("%s:\tDivision", yytext);
 {multiplication} printf("%s:\tMultiplication", yytext);
 {modulus} printf("%s:\tModulus", yytext);
-
-
-{line}  printf("Matched line of text: %s", yytext);
 
 {other} printf("%s:\tError", yytext);
 
