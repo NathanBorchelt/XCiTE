@@ -20,6 +20,8 @@ and     "AND"
 or      "OR"
 print   "PRINT"
 
+other .
+
 %%
 
 {int} printf("%s:\tINT keyword", yytext);
@@ -40,6 +42,8 @@ print   "PRINT"
 
 
 {line}  printf("Matched line of text: %s", yytext);
+
+{other} printf("%s:\tError", yytext);
 
 %%
 
