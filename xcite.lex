@@ -4,21 +4,21 @@
 #include <stdio.h>
 %}
 
-int     INT
-bool    BOOL
-float   FLOAT
-char    CHAR
-string  STRING
-array   ARRAY
-while   WHILE
-if      IF
-else    ELSE
-true    TRUE
-false   FALSE
-not     NOT
-and     AND
-or      OR
-print   PRINT
+int     "INT"
+bool    "BOOL"
+float   "FLOAT"
+char    "CHAR"
+string  "STRING"
+array   "ARRAY"
+while   "WHILE"
+if      "IF"
+else    "ELSE"
+true    "TRUE"
+false   "FALSE"
+not     "NOT"
+and     "AND"
+or      "OR"
+print   "PRINT"
 
 %%
 
