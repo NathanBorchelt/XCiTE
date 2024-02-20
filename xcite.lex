@@ -20,6 +20,26 @@ and     "AND"
 or      "OR"
 print   "PRINT"
 
+osBracket       "["
+csBracket       "]"
+assignment      "="
+comma           ","
+exclamaiton     "!"
+greaterThan     ">"
+lessThan        "<"
+gtEqual         ">="
+ltEqual         "<="
+isEqual         "=="
+openParenthesis "("
+closeParenthesis ")"
+opencBrace      "{"
+closecBrace     "}"
+addition        "+"
+subtraction     "-"
+division        "/"
+multiplication  "*"
+modulus         "%"
+
 other .
 
 %%
