@@ -20,10 +20,6 @@ and     "AND"
 or      "OR"
 print   "PRINT"    
 
-identifiers     @[]!
-
-comment         $[[alnum]]*\n
-
 osBracket       "["
 csBracket       "]"
 assignment      "="
