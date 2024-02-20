@@ -4,6 +4,7 @@
 #include <stdio.h>
 %}
 
+<<<<<<< HEAD
 int         "INT"
 bool        "BOOL"
 float       "FLOAT"
@@ -24,6 +25,23 @@ strLit      "\""[^\"]*"\""
 intLit      "0" | ["-"?][1-9][[:digit:]]*
 floatLit    ["-"?]"0."[[:digit:]]+ - ["-"?][0{2,}]"."[0{2,}] | ["-"?][1-9][[:digit:]]*"."[[:digit:]]+
 charLit     "'"."'"
+=======
+int     "INT"
+bool    "BOOL"
+float   "FLOAT"
+char    "CHAR"
+string  "STRING"
+array   "ARRAY"
+while   "WHILE"
+if      "IF"
+else    "ELSE"
+true    "TRUE"
+false   "FALSE"
+not     "NOT"
+and     "AND"
+or      "OR"
+print   "PRINT"    
+>>>>>>> 1a885595cfe818c32788fcae27f0ba9dccf2e553
 
 osBracket       "["
 csBracket       "]"
@@ -64,6 +82,26 @@ other .
 {and} printf("%s:\tAND keyword", yytext);
 {or} printf("%s:\tOR keyword", yytext);
 {print} printf("%s:\tPRINT keyword", yytext);
+
+{osBracket} printf("%s:\tOpen Square Bracket", yytext);
+{csBracket} printf("%s:\tClose Square Bracket", yytext);
+{assignment} printf("%s:\tAssignment", yytext);
+{comma} printf("%s:\tComma", yytext);
+{exclamaiton} printf("%s:\tExclamation", yytext);
+{greaterThan} printf("%s:\tGreater Than", yytext);
+{lessThan} printf("%s:\tLess Than", yytext);
+{gtEqual} printf("%s:\tGreater Than or Equal To", yytext);
+{ltEqual} printf("%s:\tLess Than or Equal To", yytext);
+{isEqual} printf("%s:\tIs Equal To", yytext);
+{openParenthesis} printf("%s:\tOpen Parathesis", yytext);
+{closeParenthesis} printf("%s:\tClose Parathesis", yytext);
+{opencBrace} printf("%s:\tOpen Curly Brace", yytext);
+{closecBrace} printf("%s:\tClose Curly Brace", yytext);
+{addition} printf("%s:\tAddition", yytext);
+{subtraction} printf("%s:\tSubtraction", yytext);
+{division} printf("%s:\tDivision", yytext);
+{multiplication} printf("%s:\tMultiplication", yytext);
+{modulus} printf("%s:\tModulus", yytext);
 
 
 {line}  printf("Matched line of text: %s", yytext);
