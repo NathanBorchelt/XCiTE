@@ -22,7 +22,7 @@ print   "PRINT"
 
 identifiers     @[]!
 
-comment         $[alph]*\n
+comment         $[[alnum]]*\n
 
 osBracket       "["
 csBracket       "]"
