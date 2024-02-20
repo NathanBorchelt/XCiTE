@@ -18,7 +18,11 @@ false   "FALSE"
 not     "NOT"
 and     "AND"
 or      "OR"
-print   "PRINT"
+print   "PRINT"    
+
+identifiers     @[]!
+
+comment         $[alph]*\n
 
 osBracket       "["
 csBracket       "]"
