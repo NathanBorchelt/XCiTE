@@ -20,6 +20,8 @@ and     "AND"
 or      "OR"
 print   "PRINT"
 
+strLit  "\""[^\"]*"\""
+
 other .
 
 %%
