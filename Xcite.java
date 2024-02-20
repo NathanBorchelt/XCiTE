@@ -1,5 +1,5 @@
 //CSC 415: Assignment 3
-//Nathan Borchelt
+//Nathan Borchelt and Mark Payne
 public class Xcite {
 
 }
