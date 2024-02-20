@@ -1,6 +1,7 @@
 # XC!TE ReadMe
 
 ## Intro
+https://gnuwin32.sourceforge.net/install.html
 
 ## Lexemes
 
