@@ -18,7 +18,7 @@ false   FALSE
 not     NOT
 and     AND
 or      OR
-print   PRIN
+print   PRINT
 
 %%
 
@@ -30,13 +30,13 @@ print   PRIN
 {int} printf("%s:\tINT keyword", yytext);
 {int} printf("%s:\tINT keyword", yytext);
 {int} printf("%s:\tINT keyword", yytext);
-{int} printf("%s:\tINT keyword", yytext);
-{int} printf("%s:\tINT keyword", yytext);
-{int} printf("%s:\tINT keyword", yytext);
-{int} printf("%s:\tINT keyword", yytext);
-{int} printf("%s:\tINT keyword", yytext);
-{int} printf("%s:\tINT keyword", yytext);
-{int} printf("%s:\tINT keyword", yytext);
+{else} printf("%s:\tELSE keyword", yytext);
+{true} printf("%s:\tTRUE keyword", yytext);
+{false} printf("%s:\tFALSE keyword", yytext);
+{not} printf("%s:\tNOT keyword", yytext);
+{and} printf("%s:\tAND keyword", yytext);
+{or} printf("%s:\tOR keyword", yytext);
+{print} printf("%s:\tPRINT keyword", yytext);
 
 
 {line}  printf("Matched line of text: %s", yytext);
