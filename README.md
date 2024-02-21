@@ -1,5 +1,5 @@
 # XC!TE ReadMe
-
+# Mark Payne and Nathan Borchelt
 ## Intro
 https://gnuwin32.sourceforge.net/install.html
 
