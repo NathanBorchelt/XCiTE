@@ -1,2 +1,4 @@
-INT @i = 0!
-PRINT(@i)!
+INT @test_id = 0!
+PRINT(@test_id)!
+
+$This is a comment&*^%
