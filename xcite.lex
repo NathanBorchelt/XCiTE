@@ -25,6 +25,9 @@ intLit     [-]?([1-9][0-9]*|0)
 floatLit    [+-]?([1-9][0-9]*|0)(\.[0-9]*[1-9])?|0\.0
 charLit     '\''.'\''
 
+identifier "@"[a-z_]+
+comment "$"[[:alnum:]]*
+
 osBracket       "["
 csBracket       "]"
 assignment      "="
@@ -44,6 +47,8 @@ subtraction     "-"
 division        "/"
 multiplication  "*"
 modulus         "%"
+
+space           [[:blank:]]*
 
 %%
 
@@ -68,6 +73,10 @@ modulus         "%"
 {floatLit} printf("%s:\tFloat Literal\n", yytext);
 {charLit} printf("%s:\tCharacter Literal\n", yytext);
 
+{identifier} printf("%s:\tIdentifier\n", yytext);
+
+{comment} printf("%s:\tComment\n", yytext);
+
 {osBracket} printf("%s:\tOpen Square Bracket\n", yytext);
 {csBracket} printf("%s:\tClose Square Bracket\n", yytext);
 {assignment} printf("%s:\tAssignment\n", yytext);
@@ -87,6 +96,8 @@ modulus         "%"
 {division} printf("%s:\tDivision\n", yytext);
 {multiplication} printf("%s:\tMultiplication\n", yytext);
 {modulus} printf("%s:\tModulus\n", yytext);
+
+{space} printf("");
 
 . printf("%s:\tError\n", yytext);
 
