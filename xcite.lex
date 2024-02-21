@@ -26,7 +26,7 @@ floatLit    [+-]?([1-9][0-9]*|0)(\.[0-9]*[1-9])?|0\.0
 charLit     '\''.'\''
 
 identifier "@"[a-z_]+
-comment "$"[[:alnum:]]*
+comment "$"[[:blank:][:punct:][:alnum:]]*
 
 osBracket       "["
 csBracket       "]"
