@@ -21,15 +21,15 @@ or          "OR"
 print       "PRINT"
 
 strLit      "\""[^\"]*"\""
-intLit      "0" | ["-"?][1-9][[:digit:]]*
-floatLit    ["-"?](0 | [1-9]([[:digits:]]*))[.](0 | ([0-9]*)[1-9])
-charLit     ['].[']
+intLit     [-]?([1-9][0-9]*|0)
+floatLit    [+-]?([1-9][0-9]*|0)(\.[0-9]*[1-9])? | 0\.0
+charLit     '\''.'\''
 
 osBracket       "["
 csBracket       "]"
 assignment      "="
 comma           ","
-exclamaiton     "!"
+exclamation     "!"
 greaterThan     ">"
 lessThan        "<"
 gtEqual         ">="
@@ -44,8 +44,6 @@ subtraction     "-"
 division        "/"
 multiplication  "*"
 modulus         "%"
-
-other .
 
 %%
 
@@ -74,14 +72,14 @@ other .
 {csBracket} printf("%s:\tClose Square Bracket", yytext);
 {assignment} printf("%s:\tAssignment", yytext);
 {comma} printf("%s:\tComma", yytext);
-{exclamaiton} printf("%s:\tExclamation", yytext);
+{exclamation} printf("%s:\tExclamation", yytext);
 {greaterThan} printf("%s:\tGreater Than", yytext);
 {lessThan} printf("%s:\tLess Than", yytext);
 {gtEqual} printf("%s:\tGreater Than or Equal To", yytext);
 {ltEqual} printf("%s:\tLess Than or Equal To", yytext);
 {isEqual} printf("%s:\tIs Equal To", yytext);
-{openParenthesis} printf("%s:\tOpen Parathesis", yytext);
-{closeParenthesis} printf("%s:\tClose Parathesis", yytext);
+{openParenthesis} printf("%s:\tOpen Parenthesis", yytext);
+{closeParenthesis} printf("%s:\tClose Parenthesis", yytext);
 {opencBrace} printf("%s:\tOpen Curly Brace", yytext);
 {closecBrace} printf("%s:\tClose Curly Brace", yytext);
 {addition} printf("%s:\tAddition", yytext);
@@ -90,7 +88,7 @@ other .
 {multiplication} printf("%s:\tMultiplication", yytext);
 {modulus} printf("%s:\tModulus", yytext);
 
-{other} printf("%s:\tError", yytext);
+. printf("%s:\tError", yytext);
 
 %%
 
