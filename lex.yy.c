@@ -1770,5 +1770,7 @@ int main(int argc, char* argv[]){
     yyin = fopen(argv[1], "r");
     yylex();
 
+    printf("Done Scanning %s...\n", argv[1]);
+    
     return 0;
 }
