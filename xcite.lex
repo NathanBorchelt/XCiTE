@@ -54,7 +54,7 @@ multiplication  "*"
 modulus         "%"
 
 space           [[:blank:]]*
-error           [:alnum:]
+error           [[:blank:][:punct:][:alnum:]]*
 
 
 %%
