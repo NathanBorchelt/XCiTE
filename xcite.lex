@@ -1,3 +1,8 @@
+%{
+//CSC 415 Assignment 3
+//Nathan Borchelt
+//Mark Payne
+%}
 %option noyywrap
 
 %{
@@ -21,8 +26,8 @@ or          "OR"
 print       "PRINT"
 
 strLit      "\""[^\"]*"\""
-intLit     [-]?([1-9][0-9]*|0)
-floatLit    [+-]?([1-9][0-9]*|0)(\.[0-9]*[1-9])?|0\.0
+intLit     [-]?([1-9][:digit:]*|0)
+floatLit    [+-]?([1-9][:digit:]*|0)(\.[:digit:]*[1-9])?|0\.0
 charLit     '\''.'\''
 
 identifier "@"[a-z_]+
@@ -49,6 +54,8 @@ multiplication  "*"
 modulus         "%"
 
 space           [[:blank:]]*
+error           [:alnum:]
+
 
 %%
 
@@ -97,7 +104,7 @@ space           [[:blank:]]*
 {multiplication} printf("%s:\tMultiplication\n", yytext);
 {modulus} printf("%s:\tModulus\n", yytext);
 
-{space} printf("");
+{space} printf("%s", yytext);
 
 . printf("%s:\tError\n", yytext);
 

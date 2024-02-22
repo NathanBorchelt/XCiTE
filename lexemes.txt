@@ -32,3 +32,4 @@ NOT NOT keyword
 AND AND keyword
 OR  OR keyword
 PRINT   PRINT keyword
+STRING "String Literal"
