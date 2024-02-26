@@ -1,0 +1,35 @@
+
+<program> -> <stmt_list>
+<stmt_list> -> <stmt> { <stmt> }
+<stmt> -> <declaration> | <loop> | <assignment> | <print_stmt> | <if_stmt>
+
+<print_stmt> -> PRINT \( <arith_expr> \) !
+<assignment> -> <l_value> = <arith_expr> !
+<loop> -> WHILE \( <cond_expr> \) \{ <stmt_list> \}
+<if_stmt> -> IF \( <cond_expr> \) \{ <stmt_list> \} [ ELSE \{ <stmt_list> \} ]
+<declaration> -> <var_decl> | <array_decl> !
+
+<l_value> -> <identifier> [ \[ <identifier> | <int_literal> \] ]
+
+<var_decl> -> <type_keyword> <identifier> [ = <arith_expr> ]
+<array_decl> -> ARRAY <type_keyword> <identifier> = \[ <literal_list> \]
+
+<type_keyword> -> INT | FLOAT | CHAR | STRING
+<literal_list> -> <literal> { \, <literal> }
+
+<arith_expr> -> <arith_term> { (+|-) <arith_term> }
+<arith_term> -> <arith_factor> { (*|/|%) <arith_factor> }
+<arith_factor> -> [ \- ] ( \( <arith_expr> \) | <l_value> | <literal> )
+
+<cond_expr> -> <cond_term> { OR <cond_term> }
+<cond_term> -> <cond_factor> { AND <cond_factor> }
+<cond_factor> -> [ NOT ] ( \( <cond_expr> \) | TRUE | FALSE | <comparison> )
+<comparison> -> <arith_expr> (>|<|>=|<=|==) <arith_expr>
+
+<literal> -> <string_literal> | <char_literal> | <int_literal> | <float_literal>
+
+<identifier> -> <lexer_regex>
+<string_literal> -> <lexer_regex>
+<char_literal> -> <lexer_regex>
+<int_literal> -> <lexer_regex>
+<float_literal> -> <lexer_regex>
