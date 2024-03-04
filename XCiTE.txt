@@ -7,7 +7,7 @@
 <assignment> -> <l_value> = <arith_expr> !
 <loop> -> WHILE \( <cond_expr> \) \{ <stmt_list> \}
 <if_stmt> -> IF \( <cond_expr> \) \{ <stmt_list> \} [ ELSE \{ <stmt_list> \} ]
-<declaration> -> <var_decl> | <array_decl> !
+<declaration> -> (<var_decl> | <array_decl>) !
 
 <l_value> -> <identifier> [ \[ <identifier> | <int_literal> \] ]
 
