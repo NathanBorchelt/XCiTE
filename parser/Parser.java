@@ -1,3 +1,4 @@
+package parser;
 //CSC 415 Programming Languages
 //Matthew Tennyson
 //
@@ -14,6 +15,10 @@
 // while parsing" error will not be properly recognized.
 
 import java.util.Scanner;
+
+import Lexer;
+import Token;
+
 import java.io.File;
 
 public class Parser
