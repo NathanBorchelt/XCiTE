@@ -1,4 +1,5 @@
 INT @test_id = 0!
+INT @test_id = -1!
 PRINT(@test_id)!
 
 $This is a comment&*^%

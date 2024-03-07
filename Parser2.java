@@ -80,11 +80,11 @@ public class Parser2 {
     private void stmt(){
         begin("stmt");
 
-        if(dataTypes.contains(current.getLexeme()) || compare("ARRAY")) declaration();
-        else if(compare("WHILE")) loop();
+        if(dataTypes.contains(current.getLexeme()) || compare("ARRAY keyword")) declaration();
+        else if(compare("WHILE keyword")) loop();
         else if(compare("Identifier")) assignment();
-        else if(compare("PRINT")) print_stmt();
-        else if(compare("IF")) if_stmt();
+        else if(compare("PRINT keyword")) print_stmt();
+        else if(compare("IF keyword")) if_stmt();
     }
 
     //<declaration> -> (<var_decl> | <array_decl>) !
@@ -137,7 +137,9 @@ public class Parser2 {
         }
     }
 
+    //<arith_expr> -> <arith_term> { (+|-) <arith_term> }
     private void arith_expr() {
+        begin("arith_expr");
         arith_term();
         while(expr.contains(current.getLexeme())){
             if(compare("addition")) match("addition");
@@ -148,7 +150,9 @@ public class Parser2 {
         }
     }
 
+    //<arith_term> -> <arith_factor> { (*|/|%) <arith_factor> }
     private void arith_term(){
+        begin("arith_term");
         arith_factor();
 
         while(term.contains(current.getLexeme())){
@@ -162,6 +166,44 @@ public class Parser2 {
         }
 
 
+    }
+
+    //<arith_factor> -> [ \- ] ( \( <arith_expr> \) | <l_value> | <literal> )
+    private void arith_factor() {
+        begin("arith_factor");
+        if(compare("subtraction")) match("subtraction");
+
+        if(compare("open parenthesis")){
+            match("open parenthesis");
+            arith_expr();
+            match("close parenthesis");
+        }
+        else if(compare("Identifier")) l_value();
+        else if(current.getDescription().contains("Literal")) literal()
+    }
+
+    //<l_value> -> <identifier> [ \[ <identifier> | <int_literal> \] ]
+    private void l_value() {
+        begin("l_value");
+        identifier();
+        if(compare("open square bracket")){
+            match("open square bracket");
+            if(compare("Identifier")) identifier();
+            else int_literal();
+            match("close square bracket");
+
+
+        }
+    }
+
+    private void int_literal() {
+        begin("int_literal");
+        match("Integer Literal");
+    }
+
+    private void literal() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'literal'");
     }
 
     //<identifier> -> <lexer_regex>
