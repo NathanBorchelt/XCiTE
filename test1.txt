@@ -2,4 +2,8 @@ INT @test_id = 0!
 INT @test_id = -1!
 PRINT(@test_id)!
 
+IF(NOT (5 <= @test_id) OR TRUE AND FALSE){
+    PRINT("TEST STUFF")!
+}
+
 $This is a comment&*^%
