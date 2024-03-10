@@ -212,18 +212,12 @@ public class Parser2 {
             match("open parenthesis");
             arith_expr();
             match("close parenthesis");
-<<<<<<< HEAD
         } else if (compare("Identifier"))
             l_value();
         else if (current.getDescription().contains("Literal"))
             literal();
         else
             error("open parenthesis", "Identifier", "Literal");
-=======
-        }
-        else if(compare("Identifier")) l_value();
-        else if(current.getDescription().contains("Literal")) literal();
->>>>>>> 8d18449bf05cec28ba8ac06e76f8d2d864a09840
     }
 
     // <l_value> -> <identifier> [ \[ <identifier> | <int_literal> \] ]
