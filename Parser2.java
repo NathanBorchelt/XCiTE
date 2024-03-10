@@ -89,7 +89,10 @@ public class Parser2 {
         begin("stmt_lst");
         stmt();
 
-        while (current != null)
+        while (current != null
+                && compare("INT keyword", "FLOAT keyword", "CHAR keyword", "STRING keyword", "ARRAY keyword",
+                        "WHILE keyword",
+                        "Identifier", "PRINT keyword", "IF keyword", "Comment"))
             stmt();
     }
 
@@ -108,8 +111,10 @@ public class Parser2 {
             print_stmt();
         else if (compare("IF keyword"))
             if_stmt();
-        else if (compare("Comment"))
+        else if (compare("Comment")) {
+            System.out.println("Comment: " + current.getLexeme());
             current = lexer.lex();
+        }
 
         else
             error("INT keyword", "FLOAT keyword", "CHAR keyword", "STRING keyword", "ARRAY keyword", "WHILE keyword",
