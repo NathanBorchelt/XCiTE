@@ -1,3 +1,6 @@
+//CSC 415 Programming Languages - Assignment 4
+// Nathan Borchelt, Mark Payne, and John Irvin
+
 import java.util.Set;
 
 public class Parser2 {
