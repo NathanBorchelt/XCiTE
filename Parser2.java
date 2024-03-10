@@ -182,7 +182,7 @@ public class Parser2 {
             match("close parenthesis");
         }
         else if(compare("Identifier")) l_value();
-        else if(current.getDescription().contains("Literal")) literal()
+        else if(current.getDescription().contains("Literal")) literal();
     }
 
     //<l_value> -> <identifier> [ \[ <identifier> | <int_literal> \] ]
