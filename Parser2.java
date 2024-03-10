@@ -6,8 +6,8 @@ import java.util.Set;
 public class Parser2 {
 
     public static void main(String[] args) {
-        //Parser2 parser = new Parser2(test1.txt);
-        Parser2 parser = new Parser2(args[0]);
+        Parser2 parser = new Parser2("test1.txt");
+        //Parser2 parser = new Parser2(args[0]);
     }
 
     private Lexer lexer;
