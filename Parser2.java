@@ -34,16 +34,15 @@ public class Parser2 {
     }
 
     private void match(String expected) {
-        if (compare(expected)) {
+
+        if (current == null && expected.equals("EOF")) {
+            System.out.println("<EOF>");
+            System.exit(0);
+        } else if (compare(expected)) {
             System.out.println("Matched: " + current.getLexeme());
             current = lexer.lex();
             if (current != null)
                 ;
-
-            else {
-                System.out.println("EOF");
-                System.exit(0);
-            }
         }
 
         else {
@@ -82,6 +81,8 @@ public class Parser2 {
         begin("program");
 
         stmt_list();
+
+        match("EOF");
     }
 
     // <stmt_list> -> <stmt> { <stmt> }
