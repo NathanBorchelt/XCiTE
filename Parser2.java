@@ -6,8 +6,8 @@ import java.util.Set;
 public class Parser2 {
 
     public static void main(String[] args) {
-        Parser2 parser = new Parser2("test1.txt");
-        //Parser2 parser = new Parser2(args[0]);
+        //Parser2 parser = new Parser2("test1.txt");
+        Parser2 parser = new Parser2(args[0]);
     }
 
     private Lexer lexer;
@@ -15,6 +15,7 @@ public class Parser2 {
 
     // Set Declarations
     // From: https://stackoverflow.com/a/1128899
+    //Sets have O(1) comparison time, small, but also nicer to write some comparisons
     private final Set<String> dataTypes = Set.of("INT keyword", "FLOAT keyword", "CHAR keyword", "STRING keyword");
 
     private final Set<String> expr = Set.of("subtraction", "addition");
@@ -91,9 +92,7 @@ public class Parser2 {
         stmt();
 
         while (current != null
-                && compare("INT keyword", "FLOAT keyword", "CHAR keyword", "STRING keyword", "ARRAY keyword",
-                        "WHILE keyword",
-                        "Identifier", "PRINT keyword", "IF keyword", "Comment"))
+                && (current.getDescription().contains("keyword") || compare("Identifier", "Comment")))
             stmt();
     }
 
@@ -102,24 +101,37 @@ public class Parser2 {
     private void stmt() {
         begin("stmt");
 
-        if (dataTypes.contains(current.getDescription()) || compare("ARRAY keyword"))
-            declaration();
-        else if (compare("WHILE keyword"))
-            loop();
-        else if (compare("Identifier"))
-            assignment();
-        else if (compare("PRINT keyword"))
-            print_stmt();
-        else if (compare("IF keyword"))
-            if_stmt();
-        else if (compare("Comment")) {
-            System.out.println("Comment: " + current.getLexeme());
-            current = lexer.lex();
-        }
+        switch (current.getDescription()) {
+            case "INT keyword":
+            case "FLOAT keyword":
+            case "CHAR keyword":
+            case "STRING keyword":
+            case "ARRAY keyword":
+                declaration();
+                break;
+            case "WHILE keyword":
+                loop();
+                break;
+            case "Identifier":
+                identifier();
+                break;
+            case "PRINT keyword":
+                print_stmt();
+                break;
+            case "IF keyword":
+                if_stmt();
+                break;
+            case "Comment":
+                match("Comment");
+                //System.out.println("Comment: " + current.getLexeme());
+                //current = lexer.lex();
+                break;
 
-        else
-            error("INT keyword", "FLOAT keyword", "CHAR keyword", "STRING keyword", "ARRAY keyword", "WHILE keyword",
+            default:
+                error("INT keyword", "FLOAT keyword", "CHAR keyword", "STRING keyword", "ARRAY keyword", "WHILE keyword",
                     "Identifier", "PRINT keyword", "IF keyword");
+                break;
+        }
     }
 
     // <declaration> -> (<var_decl> | <array_decl>) !
@@ -152,24 +164,25 @@ public class Parser2 {
     private void type_keyword() {
         begin("type_keyword");
 
-        switch (current.getLexeme()) {
-            case "INT":
+        switch (current.getDescription()) {
+            case "INT keyword":
                 match("INT keyword");
                 break;
 
-            case "FLOAT":
+            case "FLOAT keyword":
                 match("FLOAT keyword");
                 break;
 
-            case "CHAR":
+            case "CHAR keyword":
                 match("CHAR keyword");
                 break;
 
-            case "STRING":
+            case "STRING keyword":
                 match("STRING keyword");
                 break;
 
             default:
+                error("INT keyword", "FLOAT keyword", "CHAR keyword", "STRING keyword");
                 break;
         }
     }
@@ -179,11 +192,18 @@ public class Parser2 {
         begin("arith_expr");
         arith_term();
         while (expr.contains(current.getDescription())) {
-            if (compare("addition"))
-                match("addition");
+            switch (current.getDescription()) {
+                case "addition":
+                    match("addition");
+                    break;
 
-            else if (compare("subtraction"))
+                case "subtraction":
                 match("subtraction");
+                    break;
+                default:
+                    error("addition", "subtraction");
+                    break;
+            }
 
             arith_term();
         }
@@ -195,14 +215,24 @@ public class Parser2 {
         arith_factor();
 
         while (term.contains(current.getDescription())) {
-            if (compare("multiplication"))
-                match("multiplication");
 
-            else if (compare("division"))
-                match("division");
+            switch (current.getDescription()) {
+                case "multiplication":
+                    match("multiplication");
+                    break;
 
-            else if (compare("modulus"))
-                match("modulus");
+                case "division":
+                    match("division");
+                    break;
+
+                case "modulus":
+                    match("modulus");
+                    break;
+
+                default:
+                    error("multiplication", "division", "modulus");
+                    break;
+            }
 
             arith_factor();
         }
@@ -215,16 +245,26 @@ public class Parser2 {
         if (compare("subtraction"))
             match("subtraction");
 
-        if (compare("open parenthesis")) {
-            match("open parenthesis");
-            arith_expr();
-            match("close parenthesis");
-        } else if (compare("Identifier"))
-            l_value();
-        else if (current.getDescription().contains("Literal"))
-            literal();
-        else
-            error("open parenthesis", "Identifier", "Literal");
+        switch (current.getDescription()) {
+            case "open parenthesis":
+                match("open parenthesis");
+                arith_expr();
+                match("close parenthesis");
+                break;
+
+            case "Identifier":
+                l_value();
+                break;
+            case "String Literal":
+            case "Character Literal":
+            case "Integer Literal":
+            case "Float Literal":
+                literal();
+                break;
+            default:
+                error("open parenthesis", "Identifier", "Literal");
+                break;
+        }
     }
 
     // <l_value> -> <identifier> [ \[ <identifier> | <int_literal> \] ]
@@ -253,15 +293,24 @@ public class Parser2 {
 
     private void literal() {
         begin("literal");
-        if (compare("String Literal"))
-            string_literal();
-        else if (compare("Character Literal"))
-            char_literal();
-        else if (compare("Integer Literal"))
-            int_literal();
-        else if (compare("Float Literal"))
-            float_literal();
+        switch (current.getDescription()) {
+            case "String Literal":
+                string_literal();
+                break;
+            case "Character Literal":
+                char_literal();
+            break;
+            case "Integer Literal":
+                int_literal();
+            break;
+            case "Float Literal":
+                float_literal();
+            break;
 
+            default:
+                error("String Literal", "Character Literal", "Integer Literal", "Float Literal");
+                break;
+        }
     }
 
     private void string_literal() {
@@ -342,20 +391,30 @@ public class Parser2 {
     // <cond_factor> -> [ NOT ] ( \( <cond_expr> \) | TRUE | FALSE | <comparison> )
     private void cond_factor() {
         begin("cond_factor");
+
         if (compare("NOT keyword")) {
             match("NOT keyword");
         }
 
-        if (compare("open parenthesis")) {
-            match("open parenthesis");
-            cond_expr();
-            match("close parenthesis");
-        } else if (compare("TRUE keyword"))
-            match("TRUE keyword");
-        else if (compare("FALSE keyword"))
-            match("FALSE keyword");
-        else
-            comparison();
+        switch (current.getDescription()) {
+            case "open parenthesis":
+                match("open parenthesis");
+                cond_expr();
+                match("close parenthesis");
+                break;
+
+            case "TRUE keyword":
+                match("TRUE keyword");
+                break;
+
+            case "FALSE keyword":
+                match("FALSE keyword");
+                break;
+            default:
+                comparison();
+                break;
+        }
+
 
     }
 
@@ -364,19 +423,28 @@ public class Parser2 {
         begin("comparison");
         arith_expr();
 
-        if (compare("greater than"))
-            match("greater than");
-        else if (compare("greater than or equal to"))
-            match("greater than or equal to");
-        else if (compare("is equal to"))
-            match("is equal to");
-        else if (compare("less than or equal to"))
-            match("less than or equal to");
-        else if (compare("less than"))
-            match("less than");
-        else
-            error("greater than or equal to", "greater than", "less than or equal to",
-                    "less than", "is equal to");
+        switch (current.getDescription()) {
+            case "greater than":
+                match("greater than");
+                break;
+            case "greater than or equal to":
+                match("greater than or equal to");
+                break;
+            case "is equal to":
+                match("is equal to");
+                break;
+            case "less than or equal to":
+                match("less than or equal to");
+                break;
+            case "less than":
+                match("less than");
+                break;
+            default:
+                error("greater than or equal to", "greater than", "less than or equal to",
+            "less than", "is equal to");
+                break;
+        }
+
 
         arith_expr();
 

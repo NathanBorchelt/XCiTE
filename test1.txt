@@ -1,9 +1,16 @@
+$Int 1 decl
 INT @test_id = 0!
-INT @test_id = -1!
+$Int 2 decl
+INT @test_id_a = -1!
 PRINT(@test_id)!
+
 
 IF(NOT (5 <= @test_id) OR TRUE AND FALSE){
     PRINT("TEST STUFF")!
+    WHILE(TRUE){
+        PRINT("TEST STUFF")!
+    }
 }
+
 
 $This is a comment&*^%
