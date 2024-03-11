@@ -1,0 +1,6 @@
+WHILE (TRUE) {
+    PRINT("Outer loop")!
+    WHILE (FALSE) {
+        PRINT("Inner loop")!
+    }
+}
