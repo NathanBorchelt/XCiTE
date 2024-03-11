@@ -2,6 +2,7 @@
 //CSC 415 Assignment 3
 //Nathan Borchelt
 //Mark Payne
+//John Ervin
 %}
 %option noyywrap
 
